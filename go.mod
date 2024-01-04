@@ -1,4 +1,4 @@
-module auth_protos
+module "github.com/hardskulls/auth_protos"
 
 go 1.21
 
