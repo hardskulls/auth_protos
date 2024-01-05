@@ -1,4 +1,4 @@
-module sso_grpc
+module github.com/hardskulls/sso_grpc
 
 go 1.21
 
