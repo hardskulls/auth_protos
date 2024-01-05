@@ -4,7 +4,7 @@
 // - protoc             v4.25.1
 // source: auth_serv/auth_serv.proto
 
-package auth_serv_v1
+package auth_servv1
 
 import (
 	context "context"
@@ -37,7 +37,7 @@ func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
 
 func (c *authClient) Register(ctx context.Context, in *RegistrationReq, opts ...grpc.CallOption) (*RegistrationResp, error) {
 	out := new(RegistrationResp)
-	err := c.cc.Invoke(ctx, "/auth_serv.Auth/Register", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.Auth/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *authClient) Register(ctx context.Context, in *RegistrationReq, opts ...
 
 func (c *authClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, "/auth_serv.Auth/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.Auth/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *authClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallO
 
 func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminReq, opts ...grpc.CallOption) (*IsAdminResp, error) {
 	out := new(IsAdminResp)
-	err := c.cc.Invoke(ctx, "/auth_serv.Auth/IsAdmin", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.Auth/IsAdmin", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func _Auth_Register_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth_serv.Auth/Register",
+		FullMethod: "/auth.Auth/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServer).Register(ctx, req.(*RegistrationReq))
@@ -126,7 +126,7 @@ func _Auth_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth_serv.Auth/Login",
+		FullMethod: "/auth.Auth/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServer).Login(ctx, req.(*LoginReq))
@@ -144,7 +144,7 @@ func _Auth_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth_serv.Auth/IsAdmin",
+		FullMethod: "/auth.Auth/IsAdmin",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServer).IsAdmin(ctx, req.(*IsAdminReq))
@@ -156,7 +156,7 @@ func _Auth_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interf
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Auth_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth_serv.Auth",
+	ServiceName: "auth.Auth",
 	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

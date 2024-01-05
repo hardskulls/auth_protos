@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package auth_serv;
+package auth;
 
-option go_package = "hardskulls.auth_serv.v1;auth_serv_v1";
+option go_package = "hardskulls.auth_serv.v1;auth_servv1";
 
 service Auth {
   rpc Register(RegistrationReq) returns (RegistrationResp);
