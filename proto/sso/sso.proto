@@ -16,13 +16,13 @@ message RegistrationReq {
 }
 
 message RegistrationResp {
-  string user_id = 1;
+  uint64 user_id = 1;
 }
 
 message LoginReq {
   string email = 1;
   string password = 2;
-  string service_id = 3;
+  uint32 service_id = 3;
 }
 
 message LoginResp {
@@ -30,7 +30,7 @@ message LoginResp {
 }
 
 message IsAdminReq {
-  string user_id = 1;
+  uint64 user_id = 1;
 }
 
 message IsAdminResp {
