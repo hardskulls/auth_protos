@@ -5,17 +5,17 @@ package auth;
 option go_package = "hardskulls.sso.v1;ssov1";
 
 service Auth {
-  rpc Register(RegistrationReq) returns (RegistrationResp);
+  rpc Register(RegisterReq) returns (RegisterResp);
   rpc Login(LoginReq) returns (LoginResp);
   rpc IsAdmin(IsAdminReq) returns (IsAdminResp);
 }
 
-message RegistrationReq {
+message RegisterReq {
   string email = 1;
   string password = 2;
 }
 
-message RegistrationResp {
+message RegisterResp {
   uint64 user_id = 1;
 }
 

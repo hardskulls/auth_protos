@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthClient interface {
-	Register(ctx context.Context, in *RegistrationReq, opts ...grpc.CallOption) (*RegistrationResp, error)
+	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	IsAdmin(ctx context.Context, in *IsAdminReq, opts ...grpc.CallOption) (*IsAdminResp, error)
 }
@@ -35,8 +35,8 @@ func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
 	return &authClient{cc}
 }
 
-func (c *authClient) Register(ctx context.Context, in *RegistrationReq, opts ...grpc.CallOption) (*RegistrationResp, error) {
-	out := new(RegistrationResp)
+func (c *authClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	out := new(RegisterResp)
 	err := c.cc.Invoke(ctx, "/auth.Auth/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminReq, opts ...grpc.C
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility
 type AuthServer interface {
-	Register(context.Context, *RegistrationReq) (*RegistrationResp, error)
+	Register(context.Context, *RegisterReq) (*RegisterResp, error)
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	IsAdmin(context.Context, *IsAdminReq) (*IsAdminResp, error)
 	mustEmbedUnimplementedAuthServer()
@@ -76,7 +76,7 @@ type AuthServer interface {
 type UnimplementedAuthServer struct {
 }
 
-func (UnimplementedAuthServer) Register(context.Context, *RegistrationReq) (*RegistrationResp, error) {
+func (UnimplementedAuthServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 func (UnimplementedAuthServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
@@ -99,7 +99,7 @@ func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
 }
 
 func _Auth_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegistrationReq)
+	in := new(RegisterReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func _Auth_Register_Handler(srv interface{}, ctx context.Context, dec func(inter
 		FullMethod: "/auth.Auth/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).Register(ctx, req.(*RegistrationReq))
+		return srv.(AuthServer).Register(ctx, req.(*RegisterReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
